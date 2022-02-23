@@ -1,5 +1,42 @@
 <odoo>
     <data>
+        <record id="open_academy_session_view_form" model="ir.ui.view">
+            <field name="name">open_academy.session.view.form</field>
+            <field name="model">open_academy.session</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <!-- Add your fields here -->
+                            <field name="name" />
+
+                        </group>
+
+                        <notebook>
+
+                            <page string="Description" name="description">
+                                <group name="group_description" string="Details">
+                                    <field name="start_date"/>
+                                    <field name="duration"/>
+                                    <field name="number_seats"/>
+                                    <field name="attendees"/>
+                                </group>
+                            </page>
+
+                            <page string="Sessions details" name="session">
+                                <group name="group_session" string="Details">
+                                    <field name="instructor"/>
+                                    <field name="course"/>
+                                </group>
+                            </page>
+
+                        </notebook>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
 
         <record model="ir.actions.act_window" id="action_list_session">
             <field name="name">Session</field>

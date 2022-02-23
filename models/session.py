@@ -22,10 +22,12 @@ class Session(models.Model):
         Integer="Number of Seats"
     )
 
-    instructor  = fields.Many2one(
+    instructor = fields.Many2one(
         string='Instructor',
         comodel_name='res.partner',
         ondelete='restrict',
+        required=True,
+        domain = ['|', ('instructor', '=', True), ('category_id.name', 'ilike', "Teacher")]
     )
 
     course = fields.Many2one(
@@ -34,7 +36,7 @@ class Session(models.Model):
         ondelete='restrict',
         required=True
     )
-    
+
     attendees = fields.Many2many(
         string='Attendees',
         comodel_name='res.partner'
