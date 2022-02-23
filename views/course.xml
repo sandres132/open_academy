@@ -1,0 +1,13 @@
+<odoo>
+  <data>
+
+    <record model="ir.actions.act_window" id="action_list_course">
+      <field name="name">Courses</field>
+      <field name="res_model">open_academy.course</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="OpenAcademy" id="menu_open_academy" sequence="10"/>
+    <menuitem name="Courses" id="menu_course" sequence="10" parent="menu_open_academy" action="action_list_course"/>
+  </data>
+</odoo>
