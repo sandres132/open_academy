@@ -34,3 +34,9 @@ class Session(models.Model):
         ondelete='restrict',
         required=True
     )
+    
+    attendees = fields.Many2many(
+        string='Attendees',
+        comodel_name='res.partner'
+    )
+    
