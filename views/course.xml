@@ -43,6 +43,11 @@
                                 <field name="description" placeholder="A short description"/>
                             </page>
 
+                            <page string="Sessions" name="session">
+                                <field name="session"/>
+                            </page>
+
+
                         </notebook>
 
                     </sheet>

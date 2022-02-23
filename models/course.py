@@ -23,3 +23,10 @@ class Course(models.Model):
     description = fields.Text(
         string='Description'
     )
+
+    session = fields.One2many(
+        string='Session',
+        comodel_name='open_academy.session',
+        inverse_name='course',
+    )
+    
