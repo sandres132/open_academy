@@ -1,23 +1,49 @@
 <odoo>
-  <data>
-    <record model="ir.ui.view" id="open_academy.course_tree">
-      <field name="name">Course list</field>
-      <field name="model">open_academy.course</field>
-      <field name="arch" type="xml">
-        <tree>
-          <field name="name"/>
-          <field name="description"/>
-        </tree>
-      </field>
-    </record>
+    <data>
+        <record model="ir.ui.view" id="open_academy.course_tree">
+            <field name="name">Course list</field>
+            <field name="model">open_academy.course</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
 
-    <record model="ir.actions.act_window" id="action_list_course">
-      <field name="name">Courses</field>
-      <field name="res_model">open_academy.course</field>
-      <field name="view_mode">tree,form</field>
-    </record>
+        <!-- open_academy.course form view -->
+        <record id="open_academy_course_view_form" model="ir.ui.view">
+            <field name="name">open_academy.course.view.form</field>
+            <field name="model">open_academy.course</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <!-- Add your fields here -->
+                            <field name="name" />
 
-    <menuitem name="OpenAcademy" id="menu_open_academy" sequence="90"/>
-    <menuitem name="Courses" id="menu_course" sequence="10" parent="menu_open_academy" action="action_list_course"/>
-  </data>
+                        </group>
+
+                        <notebook>
+
+                            <page string="Description" name="description">
+                                <field name="description" placeholder="A short description"/>
+                            </page>
+
+                        </notebook>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_list_course">
+            <field name="name">Courses</field>
+            <field name="res_model">open_academy.course</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="OpenAcademy" id="menu_open_academy" sequence="90"/>
+        <menuitem name="Courses" id="menu_course" sequence="10" parent="menu_open_academy" action="action_list_course"/>
+    </data>
 </odoo>
