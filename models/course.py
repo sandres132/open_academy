@@ -13,8 +13,13 @@ class Course(models.Model):
     title = fields.Char(
         string='Title'
     )
-    # value = fields.Integer()
-    # value2 = fields.Float(compute="_value_pc", store=True)
+
+    responsible  = fields.Many2one(
+        string='Responsible',
+        comodel_name='res.users',
+        ondelete='restrict',
+    )
+
     description = fields.Text(
         string='Description'
     )

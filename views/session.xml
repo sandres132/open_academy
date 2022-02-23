@@ -1,0 +1,12 @@
+<odoo>
+    <data>
+
+        <record model="ir.actions.act_window" id="action_list_session">
+            <field name="name">Session</field>
+            <field name="res_model">open_academy.session</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Session" id="menu_session" sequence="10" parent="menu_open_academy" action="action_list_session"/>
+    </data>
+</odoo>
