@@ -11,10 +11,10 @@ class Course(models.Model):
         string='Course'
     )
     title = fields.Char(
-        string='First course'
+        string='Title'
     )
     # value = fields.Integer()
     # value2 = fields.Float(compute="_value_pc", store=True)
     description = fields.Text(
-        string='Course of open_academy'
+        string='Description'
     )
