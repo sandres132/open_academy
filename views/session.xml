@@ -17,8 +17,10 @@
                             <page string="Description" name="description">
                                 <group name="group_description" string="Details">
                                     <field name="start_date"/>
+                                    <field name="active"/>
                                     <field name="duration"/>
                                     <field name="number_seats"/>
+                                    <field name="percentage" widget="progressbar"/>
                                     <field name="attendees"/>
                                 </group>
                             </page>

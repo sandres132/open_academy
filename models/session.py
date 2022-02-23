@@ -11,7 +11,8 @@ class Session(models.Model):
         string='Session'
     )
     start_date = fields.Date(
-        date='Date'
+        date='Date',
+        default=fields.Date.context_today,
     )
     
     duration = fields.Float(
@@ -40,5 +41,27 @@ class Session(models.Model):
     attendees = fields.Many2many(
         string='Attendees',
         comodel_name='res.partner'
+    )
+
+    @api.depends('number_seats')
+    @api.depends('attendees')
+    def taken_seats(self):
+        cont=0
+
+        for record in self.attendees:
+            cont=cont+1
+
+        for record in self:
+            record.percentage = (cont/record.number_seats)*100
+
+    percentage = fields.Float(
+        string='Taken seats percentage',
+        compute=taken_seats
+    )
+    
+    
+    active = fields.Boolean(
+        string='Active',
+        default=True,
     )
     
