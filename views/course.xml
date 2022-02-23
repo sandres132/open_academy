@@ -7,7 +7,7 @@
       <field name="view_mode">tree,form</field>
     </record>
 
-    <menuitem name="OpenAcademy" id="menu_open_academy" sequence="10"/>
+    <menuitem name="OpenAcademy" id="menu_open_academy" sequence="90"/>
     <menuitem name="Courses" id="menu_course" sequence="10" parent="menu_open_academy" action="action_list_course"/>
   </data>
 </odoo>
