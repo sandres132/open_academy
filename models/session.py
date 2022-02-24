@@ -11,6 +11,7 @@ class Session(models.Model):
     name = fields.Char(
         string='Session'
     )
+
     start_date = fields.Date(
         date='Date',
         default=fields.Date.context_today,
@@ -40,6 +41,17 @@ class Session(models.Model):
         ondelete='restrict',
         required=True
     )
+
+    @api.depends('attendees')
+    def total_attend(self):
+        for record in self:
+            record.attend_count = len(record.attendees)
+
+    attend_count = fields.Integer(
+        string='Attend_count',
+        compute = total_attend
+    )
+    
 
     @api.constrains('attendees', 'instructor')
     def _check_something(self):
