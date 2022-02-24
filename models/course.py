@@ -40,3 +40,6 @@ class Course(models.Model):
         comodel_name='open_academy.session',
         inverse_name='course'
     )
+
+    def my_courses(self):
+        return "si"

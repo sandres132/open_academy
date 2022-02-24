@@ -31,11 +31,15 @@
             <field name="model">open_academy.course</field>
             <field name="arch" type="xml">
                 <form string="">
+                    <header>
+                        <button name="my_courses" string="My courses" type="object" class="oe_highlight"/>
+                    </header>
                     <sheet>
                         <group>
                             <!-- Add your fields here -->
                             <field name="name" />
                             <field name="title"/>
+                            <field name="responsible" />
                         </group>
 
                         <notebook>

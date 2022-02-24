@@ -33,6 +33,16 @@
             </field>
         </record>
 
+        <record model="ir.ui.view" id="session_calendar_view">
+            <field name="name">open_academy.session.calendar</field>
+            <field name="model">open_academy.session</field>
+            <field name="arch" type="xml">
+                <calendar string="Session Calendar" date_start="start_date" color="instructor">
+                    <field name="name"/>
+                </calendar>
+            </field>
+        </record>
+
         <!-- open_academy.session tree view -->
         <record id="model_name_view_tree" model="ir.ui.view">
             <field name="name">open_academy.view.tree</field>
@@ -50,7 +60,7 @@
         <record model="ir.actions.act_window" id="action_list_session">
             <field name="name">Session</field>
             <field name="res_model">open_academy.session</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">tree,form,calendar</field>
         </record>
 
         <menuitem name="Session" id="menu_session" sequence="10" parent="menu_open_academy" action="action_list_session"/>
