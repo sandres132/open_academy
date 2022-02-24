@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
-
+from odoo.exceptions import ValidationError
 
 class Course(models.Model):
     _name = 'open_academy.course'
@@ -10,6 +10,12 @@ class Course(models.Model):
     name = fields.Char(
         string='Course'
     )
+
+    _sql_constraints = [
+        ("name_cnst", "UNIQUE(name)", "Course name has to be unique"),
+        ("chk_cnst", "CHECK(title!=description)", "Course description has to be diferent than title"),
+    ]
+
     title = fields.Char(
         string='Title'
     )
@@ -27,6 +33,6 @@ class Course(models.Model):
     session = fields.One2many(
         string='Session',
         comodel_name='open_academy.session',
-        inverse_name='course',
+        inverse_name='course'
     )
     

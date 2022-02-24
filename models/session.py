@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
+from odoo.exceptions import UserError, ValidationError
 
 
 class Session(models.Model):
@@ -14,7 +15,7 @@ class Session(models.Model):
         date='Date',
         default=fields.Date.context_today,
     )
-    
+
     duration = fields.Float(
         float='Duration'
     )
@@ -28,7 +29,8 @@ class Session(models.Model):
         comodel_name='res.partner',
         ondelete='restrict',
         required=True,
-        domain = ['|', ('instructor', '=', True), ('category_id.name', 'ilike', "Teacher")]
+        domain=['|', ('instructor', '=', True),
+                ('category_id.name', 'ilike', "Teacher")]
     )
 
     course = fields.Many2one(
@@ -38,6 +40,12 @@ class Session(models.Model):
         required=True
     )
 
+    @api.constrains('attendees', 'instructor')
+    def _check_something(self):
+        for record in self.attendees:
+            if record==self.instructor:
+                raise ValidationError("Your record is categorized as the instructor of this session")
+
     attendees = fields.Many2many(
         string='Attendees',
         comodel_name='res.partner'
@@ -46,22 +54,44 @@ class Session(models.Model):
     @api.depends('number_seats')
     @api.depends('attendees')
     def taken_seats(self):
-        cont=0
+        cont = 0
 
         for record in self.attendees:
-            cont=cont+1
+            cont = cont+1
 
         for record in self:
             record.percentage = (cont/record.number_seats)*100
 
+    @api.onchange('attendees', 'number_seats')
+    def _onchange_porcentage(self):
+        cont = 0
+
+        for record in self.attendees:
+            cont = cont+1
+
+        if cont<=self.number_seats and self.number_seats>0:
+            self.percentage = (cont/self.number_seats)
+        elif self.number_seats<=0:
+            return {
+                'warning': {
+                    'title': "Something bad happened",
+                    'message': "Negative number of seats",
+                }
+            }
+        elif cont>self.number_seats:
+            return {
+                'warning': {
+                    'title': "Something bad happened",
+                    'message': "There are more participants than seats",
+                }
+            }
+
     percentage = fields.Float(
         string='Taken seats percentage',
-        compute=taken_seats
+        compute=taken_seats,
     )
-    
-    
+
     active = fields.Boolean(
         string='Active',
         default=True,
     )
-    
