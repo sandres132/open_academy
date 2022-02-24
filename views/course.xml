@@ -9,6 +9,10 @@
                     <!-- Add your fields here -->
                     <field name="title"/>
                     <field name="description"/>
+                    <filter name="mis_cursos" string="My courses" domain="[('responsible', '=', uid)]"/>
+                    <group string="Agrupar por">
+                        <filter name="by_responsible" string="Responsible" context="{'group_by': 'responsible'}"/>
+                    </group>
                 </search>
             </field>
         </record>
