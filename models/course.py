@@ -6,6 +6,13 @@ from odoo.exceptions import ValidationError
 class Course(models.Model):
     _name = 'open_academy.course'
     _description = 'Course'
+    
+    def copy(self, default=None):
+        if default is None:
+            default={}
+        if not default.get('name'):
+            default['name'] = "Copy of ["+self.name+"]"
+        return super(Course, self).copy(default)
 
     name = fields.Char(
         string='Course'
@@ -35,4 +42,3 @@ class Course(models.Model):
         comodel_name='open_academy.session',
         inverse_name='course'
     )
-    
