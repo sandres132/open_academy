@@ -9,11 +9,8 @@
                         <group>
                             <!-- Add your fields here -->
                             <field name="name" />
-
                         </group>
-
                         <notebook>
-
                             <page string="Description" name="description">
                                 <group name="group_description" string="Details">
                                     <field name="start_date"/>
@@ -24,21 +21,31 @@
                                     <field name="attendees"/>
                                 </group>
                             </page>
-
                             <page string="Sessions details" name="session">
                                 <group name="group_session" string="Details">
                                     <field name="instructor"/>
                                     <field name="course"/>
                                 </group>
                             </page>
-
                         </notebook>
-
                     </sheet>
                 </form>
             </field>
         </record>
 
+        <!-- open_academy.session tree view -->
+        <record id="model_name_view_tree" model="ir.ui.view">
+            <field name="name">open_academy.view.tree</field>
+            <field name="model">open_academy.session</field>
+            <field name="arch" type="xml">
+                <tree decoration-info="duration&lt;5" decoration-danger="duration&gt;15">
+                    <!-- Add your fields here -->
+                    <field name="name" />
+                    <field name="number_seats" />
+                    <field name="duration"/>
+                </tree>
+            </field>
+        </record>
 
         <record model="ir.actions.act_window" id="action_list_session">
             <field name="name">Session</field>

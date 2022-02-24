@@ -21,7 +21,8 @@ class Session(models.Model):
     )
 
     number_seats = fields.Integer(
-        Integer="Number of Seats"
+        Integer="Number of Seats",
+        default = 1
     )
 
     instructor = fields.Many2one(

@@ -7,9 +7,7 @@ class Course(models.Model):
     _name = 'open_academy.course'
     _description = 'Course'
     
-    def copy(self, default=None):
-        if default is None:
-            default={}
+    def copy(self, default={}):
         if not default.get('name'):
             default['name'] = "Copy of ["+self.name+"]"
         return super(Course, self).copy(default)
